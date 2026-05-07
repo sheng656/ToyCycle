@@ -1,0 +1,160 @@
+{
+  "metadata": {
+    "title": "ToyCycle — Community Toy Exchange",
+    "description": "A location-based neighbourhood toy exchange platform. Keep toys circulating, reduce waste, build community."
+  },
+  "common": {
+    "appName": "ToyCycle",
+    "login": "Log in",
+    "register": "Sign up",
+    "logout": "Log out",
+    "search": "Search",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "back": "Back",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Retry",
+    "viewAll": "View all",
+    "noResults": "No results"
+  },
+  "nav": {
+    "home": "Home",
+    "discover": "Discover",
+    "listToy": "List a Toy",
+    "messages": "Messages",
+    "profile": "Profile"
+  },
+  "home": {
+    "hero": "Keep toys circulating in your neighbourhood",
+    "subtitle": "A location-based community toy exchange platform",
+    "ctaPublish": "List my toy",
+    "ctaBrowse": "Browse nearby toys",
+    "nearbyToys": "Nearby Toys",
+    "walkMode": "15-min walk",
+    "driveMode": "15-min drive",
+    "statsExchanged": "Exchanged",
+    "statsFamilies": "Active Families",
+    "statsWasteSaved": "Waste Saved"
+  },
+  "toys": {
+    "listToy": "List a Toy",
+    "editToy": "Edit Toy",
+    "title": "Toy Name",
+    "titlePlaceholder": "e.g. LEGO City Fire Station",
+    "description": "Description",
+    "descriptionPlaceholder": "Describe the condition, included accessories, etc.",
+    "category": "Category",
+    "categories": {
+      "building": "Building / Construction",
+      "figures": "Figures / Models",
+      "vehicles": "Vehicles / Transport",
+      "puzzles": "Puzzles / Board Games",
+      "outdoor": "Outdoor Toys",
+      "electronic": "Electronic Toys",
+      "stuffed": "Stuffed Animals",
+      "educational": "Educational",
+      "creative": "Arts & Crafts",
+      "other": "Other"
+    },
+    "condition": "Condition",
+    "conditions": {
+      "new": "Brand New",
+      "likeNew": "Like New",
+      "used": "Visibly Used"
+    },
+    "estimatedValue": "Estimated Value (Toy Credits)",
+    "estimatedValueHint": "Set a fair value based on original price and condition",
+    "ageRange": "Suitable Age",
+    "ageRanges": {
+      "0-1": "0–1 years",
+      "1-3": "1–3 years",
+      "3-6": "3–6 years",
+      "6-9": "6–9 years",
+      "9-12": "9–12 years",
+      "12+": "12+ years"
+    },
+    "cleaned": "Cleaned / Sanitised",
+    "photos": "Upload Photos",
+    "photosHint": "Up to 5 photos. First photo is the cover.",
+    "publish": "Publish",
+    "status": {
+      "available": "Available",
+      "reserved": "Reserved",
+      "exchanged": "Exchanged"
+    },
+    "detail": {
+      "requestExchange": "Request Exchange",
+      "sendMessage": "Send Message",
+      "postedBy": "Posted by",
+      "postedAt": "Posted",
+      "location": "Location"
+    }
+  },
+  "exchange": {
+    "title": "Exchange Requests",
+    "request": "Request Exchange",
+    "accept": "Accept",
+    "decline": "Decline",
+    "complete": "Mark Complete",
+    "credits": "Toy Credits",
+    "creditsBalance": "Balance: {balance} Toy Credits",
+    "costLabel": "Cost",
+    "earnLabel": "You'll earn",
+    "status": {
+      "pending": "Pending",
+      "accepted": "Accepted",
+      "rejected": "Rejected",
+      "completed": "Completed"
+    },
+    "noRequests": "No exchange requests"
+  },
+  "chat": {
+    "conversations": "Messages",
+    "sendMessage": "Send Message",
+    "placeholder": "Type a message...",
+    "noConversations": "No conversations yet",
+    "online": "Online",
+    "offline": "Offline"
+  },
+  "profile": {
+    "myProfile": "My Profile",
+    "editProfile": "Edit Profile",
+    "displayName": "Display Name",
+    "location": "Location",
+    "setLocation": "Set Location",
+    "myToys": "My Listings",
+    "exchangeHistory": "Exchange History",
+    "creditsBalance": "Toy Credits Balance",
+    "memberSince": "Member since"
+  },
+  "auth": {
+    "loginTitle": "Welcome back to ToyCycle",
+    "loginSubtitle": "Log in to start exchanging toys",
+    "registerTitle": "Join ToyCycle",
+    "registerSubtitle": "Create an account and keep toys circulating",
+    "email": "Email",
+    "emailPlaceholder": "your@email.com",
+    "password": "Password",
+    "passwordPlaceholder": "At least 6 characters",
+    "confirmPassword": "Confirm Password",
+    "loginButton": "Log in",
+    "registerButton": "Sign up",
+    "orContinueWith": "Or continue with",
+    "wechatLogin": "WeChat Login",
+    "googleLogin": "Google Login",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "forgotPassword": "Forgot password?"
+  },
+  "footer": {
+    "tagline": "Keep toys circulating in your neighbourhood",
+    "about": "About",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy",
+    "contact": "Contact"
+  }
+}

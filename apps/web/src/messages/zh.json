@@ -1,0 +1,160 @@
+{
+  "metadata": {
+    "title": "玩具循环 — 社区玩具交换平台",
+    "description": "基于地理位置的邻里玩具交换平台，让玩具在社区中流转，减少浪费，建立邻里关系。"
+  },
+  "common": {
+    "appName": "玩具循环",
+    "login": "登录",
+    "register": "注册",
+    "logout": "退出登录",
+    "search": "搜索",
+    "cancel": "取消",
+    "confirm": "确认",
+    "save": "保存",
+    "delete": "删除",
+    "edit": "编辑",
+    "back": "返回",
+    "loading": "加载中...",
+    "error": "出错了",
+    "retry": "重试",
+    "viewAll": "查看全部",
+    "noResults": "暂无结果"
+  },
+  "nav": {
+    "home": "首页",
+    "discover": "发现",
+    "listToy": "发布玩具",
+    "messages": "消息",
+    "profile": "我的"
+  },
+  "home": {
+    "hero": "让玩具在邻里间流转",
+    "subtitle": "基于地理位置的社区玩具交换平台",
+    "ctaPublish": "发布我的玩具",
+    "ctaBrowse": "浏览附近玩具",
+    "nearbyToys": "附近的玩具",
+    "walkMode": "15分钟步行",
+    "driveMode": "15分钟车程",
+    "statsExchanged": "已交换",
+    "statsFamilies": "活跃家庭",
+    "statsWasteSaved": "减少浪费"
+  },
+  "toys": {
+    "listToy": "发布玩具",
+    "editToy": "编辑玩具",
+    "title": "玩具名称",
+    "titlePlaceholder": "例如：乐高城市系列 消防局",
+    "description": "描述",
+    "descriptionPlaceholder": "描述一下这个玩具的状态、包含的配件等",
+    "category": "分类",
+    "categories": {
+      "building": "积木/拼搭",
+      "figures": "玩偶/模型",
+      "vehicles": "车辆/交通",
+      "puzzles": "拼图/桌游",
+      "outdoor": "户外玩具",
+      "electronic": "电子玩具",
+      "stuffed": "毛绒玩具",
+      "educational": "益智玩具",
+      "creative": "创意手工",
+      "other": "其他"
+    },
+    "condition": "成色",
+    "conditions": {
+      "new": "全新",
+      "likeNew": "九成新",
+      "used": "有明显使用痕迹"
+    },
+    "estimatedValue": "估值（玩具币）",
+    "estimatedValueHint": "参考原价和成色设置合理估值",
+    "ageRange": "适合年龄",
+    "ageRanges": {
+      "0-1": "0-1岁",
+      "1-3": "1-3岁",
+      "3-6": "3-6岁",
+      "6-9": "6-9岁",
+      "9-12": "9-12岁",
+      "12+": "12岁以上"
+    },
+    "cleaned": "已清洗/消毒",
+    "photos": "上传照片",
+    "photosHint": "最多5张，第一张为封面",
+    "publish": "发布",
+    "status": {
+      "available": "可交换",
+      "reserved": "已预留",
+      "exchanged": "已交换"
+    },
+    "detail": {
+      "requestExchange": "发起交换",
+      "sendMessage": "发消息",
+      "postedBy": "发布者",
+      "postedAt": "发布于",
+      "location": "位置"
+    }
+  },
+  "exchange": {
+    "title": "交换请求",
+    "request": "发起交换",
+    "accept": "接受",
+    "decline": "拒绝",
+    "complete": "确认完成",
+    "credits": "玩具币",
+    "creditsBalance": "余额: {balance} 玩具币",
+    "costLabel": "需支付",
+    "earnLabel": "将获得",
+    "status": {
+      "pending": "等待回复",
+      "accepted": "已接受",
+      "rejected": "已拒绝",
+      "completed": "已完成"
+    },
+    "noRequests": "暂无交换请求"
+  },
+  "chat": {
+    "conversations": "消息",
+    "sendMessage": "发送消息",
+    "placeholder": "输入消息...",
+    "noConversations": "暂无对话",
+    "online": "在线",
+    "offline": "离线"
+  },
+  "profile": {
+    "myProfile": "我的资料",
+    "editProfile": "编辑资料",
+    "displayName": "昵称",
+    "location": "位置",
+    "setLocation": "设置位置",
+    "myToys": "我发布的玩具",
+    "exchangeHistory": "交换记录",
+    "creditsBalance": "玩具币余额",
+    "memberSince": "注册于"
+  },
+  "auth": {
+    "loginTitle": "欢迎回到玩具循环",
+    "loginSubtitle": "登录以开始交换玩具",
+    "registerTitle": "加入玩具循环",
+    "registerSubtitle": "创建账号，让玩具在邻里间流转",
+    "email": "邮箱",
+    "emailPlaceholder": "your@email.com",
+    "password": "密码",
+    "passwordPlaceholder": "至少6位字符",
+    "confirmPassword": "确认密码",
+    "loginButton": "登录",
+    "registerButton": "注册",
+    "orContinueWith": "或通过以下方式继续",
+    "wechatLogin": "微信登录",
+    "googleLogin": "Google 登录",
+    "noAccount": "还没有账号？",
+    "hasAccount": "已有账号？",
+    "forgotPassword": "忘记密码？"
+  },
+  "footer": {
+    "tagline": "让玩具在邻里间流转",
+    "about": "关于我们",
+    "terms": "服务条款",
+    "privacy": "隐私政策",
+    "contact": "联系我们"
+  }
+}
