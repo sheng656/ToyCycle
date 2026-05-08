@@ -1,6 +1,8 @@
 import { useTranslations } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
-import ToyList from '@/components/toys/ToyList';
+import { getToys } from '@/lib/actions/toys';
+import ToysViewToggle from '@/components/toys/ToysViewToggle';
+import { getTranslations } from 'next-intl/server';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -9,11 +11,13 @@ type Props = {
 export default async function ToysPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
-  return <ToysContent />;
+  return <ToysContent locale={locale} />;
 }
 
-function ToysContent() {
-  const t = useTranslations();
+async function ToysContent({ locale }: { locale: string }) {
+  // Use getTranslations for async components
+  const t = await getTranslations({ locale });
+  const toys = await getToys();
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 animate-fade-in">
@@ -75,8 +79,8 @@ function ToysContent() {
         <CategoryChip emoji="🎨" label={t('toys.categories.creative')} />
       </div>
 
-      {/* Toy Grid */}
-      <ToyList />
+      {/* Toy Grid / Map Toggle */}
+      <ToysViewToggle toys={toys} />
     </div>
   );
 }
