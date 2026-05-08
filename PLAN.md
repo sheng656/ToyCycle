@@ -16,7 +16,8 @@
 | MVP 语言 | 中文，Day 1 搭建 `next-intl` i18n 架构，不写死文本 |
 | 地图服务 | 高德地图 AMap JS API 2.0（Mapbox 在中国被禁，ORS 数据差）|
 | 支付 | 微信支付 + 支付宝（MVP），Stripe（国际扩展时）|
-| CSS 框架 | Tailwind CSS |
+| CSS 框架 | Tailwind CSS (v4) |
+| 设计系统 | "Tactile-Modern" (来自 Stitch MCP), Quicksand + Nunito Sans |
 | 数据库 | 新建 Supabase 项目 |
 | 域名 | toycycle.sheng.nz |
 | 未来扩展 | 新西兰/国际 → Mapbox + Stripe + 英文 i18n |
@@ -176,7 +177,8 @@ Plus (¥29.9/月) → 无限交换，优先热门玩具，每月免 2 次手续�
 | MVP Language | Chinese; Day 1 `next-intl` i18n architecture (no hardcoded strings) |
 | Map Service | AMap JS API 2.0 (Mapbox banned in China, ORS poor data quality) |
 | Payments | WeChat Pay + Alipay (MVP); Stripe (international expansion) |
-| CSS Framework | Tailwind CSS |
+| CSS Framework | Tailwind CSS (v4) |
+| Design System | "Tactile-Modern" (via Stitch MCP), Quicksand + Nunito Sans |
 | Database | New Supabase project |
 | Domain | toycycle.sheng.nz |
 | Future | NZ / International → Mapbox + Stripe + English i18n |

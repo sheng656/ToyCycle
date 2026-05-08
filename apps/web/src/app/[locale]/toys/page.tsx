@@ -20,20 +20,20 @@ function ToysContent() {
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold">{t('nav.discover')}</h1>
+          <h1 className="text-2xl sm:text-3xl font-heading font-bold">{t('nav.discover')}</h1>
           <p className="text-muted mt-1">{t('home.subtitle')}</p>
         </div>
 
         {/* Filters */}
         <div className="flex items-center gap-3">
           <button
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-border text-sm font-medium hover:bg-surface-elevated transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border-2 border-outline/20 text-sm font-bold hover:bg-primary-container/10 hover:border-primary/30 transition-all"
             id="filter-walk"
           >
             🚶 {t('home.walkMode')}
           </button>
           <button
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-primary bg-primary-50 text-primary-dark text-sm font-medium hover:bg-primary-100 transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border-2 border-primary bg-primary-container/20 text-primary text-sm font-bold hover:bg-primary-container/30 transition-all"
             id="filter-drive"
           >
             🚗 {t('home.driveMode')}
@@ -56,7 +56,7 @@ function ToysContent() {
           <input
             type="text"
             placeholder={t('common.search') + '...'}
-            className="w-full pl-12 pr-4 py-3 rounded-xl border border-border bg-surface text-sm placeholder:text-muted-light focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+            className="w-full pl-12 pr-4 py-3 rounded-2xl border-2 border-outline/20 bg-white text-sm placeholder:text-outline focus:border-primary focus:ring-2 focus:ring-primary/15 outline-none transition-all"
             id="toy-search"
           />
         </div>
@@ -83,7 +83,7 @@ function ToysContent() {
 
 function CategoryChip({ emoji, label }: { emoji: string; label: string }) {
   return (
-    <button className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border text-sm hover:border-primary hover:text-primary hover:bg-primary-50 transition-all">
+    <button className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border-2 border-outline/20 text-sm font-bold hover:border-primary hover:text-primary hover:bg-primary-container/10 transition-all">
       <span>{emoji}</span>
       <span>{label}</span>
     </button>

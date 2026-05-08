@@ -17,20 +17,20 @@ export default function ToyCard({ toy }: ToyCardProps) {
   return (
     <Link
       href={`/toys/${toy.id}`}
-      className="group block rounded-2xl bg-surface border border-border shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 overflow-hidden"
+      className="group block rounded-3xl bg-white border-2 border-outline/5 shadow-card hover:shadow-card-hover transition-all duration-500 hover:-translate-y-2 overflow-hidden"
       id={`toy-card-${toy.id}`}
     >
       {/* Image placeholder */}
-      <div className="aspect-[4/3] bg-gradient-to-br from-primary-50 to-primary-100 relative overflow-hidden">
+      <div className="aspect-[4/3] bg-gradient-to-br from-primary-container/10 to-primary-container/30 relative overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-6xl opacity-60 group-hover:scale-110 transition-transform duration-300">
+          <span className="text-6xl opacity-40 group-hover:scale-125 transition-transform duration-700 ease-out">
             {categoryEmoji}
           </span>
         </div>
 
         {/* Status badge */}
         <div className="absolute top-3 left-3">
-          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-white/90 backdrop-blur-sm text-primary-dark shadow-sm">
+          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-white/90 backdrop-blur-md text-primary shadow-sm">
             {t(`toys.conditions.${conditionKey}`)}
           </span>
         </div>
@@ -38,7 +38,7 @@ export default function ToyCard({ toy }: ToyCardProps) {
         {/* Cleaned badge */}
         {toy.is_cleaned && (
           <div className="absolute top-3 right-3">
-            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-white/90 backdrop-blur-sm text-success shadow-sm">
+            <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-white/90 backdrop-blur-md text-success shadow-sm">
               ✨ {t('toys.cleaned')}
             </span>
           </div>
@@ -46,36 +46,34 @@ export default function ToyCard({ toy }: ToyCardProps) {
 
         {/* Credits */}
         <div className="absolute bottom-3 right-3">
-          <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-sm font-bold bg-secondary/90 backdrop-blur-sm text-white shadow-md">
+          <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-sm font-bold bg-amber text-amber-container-on shadow-card border border-white/20">
             💰 {toy.estimated_value}
           </span>
         </div>
       </div>
 
       {/* Info */}
-      <div className="p-4">
-        <h3 className="font-semibold text-sm leading-snug line-clamp-2 group-hover:text-primary transition-colors">
+      <div className="p-5">
+        <h3 className="font-heading font-bold text-base leading-snug line-clamp-2 group-hover:text-primary transition-colors">
           {toy.title}
         </h3>
 
-        <div className="mt-2 flex items-center gap-2 text-xs text-muted">
-          <span>{categoryEmoji} {t(`toys.categories.${toy.category}`)}</span>
-          <span>·</span>
-          <span>{t(`toys.ageRanges.${toy.age_range}`)}</span>
+        <div className="mt-2 flex items-center gap-2 text-xs font-bold text-muted">
+          <span className="bg-surface-container-low px-2 py-0.5 rounded-lg">{categoryEmoji} {t(`toys.categories.${toy.category}`)}</span>
+          <span className="bg-surface-container-low px-2 py-0.5 rounded-lg">{t(`toys.ageRanges.${toy.age_range}`)}</span>
         </div>
 
         {toy.owner && (
-          <div className="mt-3 pt-3 border-t border-border-light flex items-center gap-2">
-            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white text-xs font-bold">
+          <div className="mt-4 pt-4 border-t border-outline/10 flex items-center gap-2">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-primary-container flex items-center justify-center text-white text-xs font-bold shadow-sm">
               {toy.owner.display_name.charAt(0)}
             </div>
-            <span className="text-xs text-muted">{toy.owner.display_name}</span>
-            {toy.owner.location_name && (
-              <>
-                <span className="text-xs text-muted">·</span>
-                <span className="text-xs text-muted truncate">{toy.owner.location_name}</span>
-              </>
-            )}
+            <div className="flex flex-col min-w-0">
+              <span className="text-xs font-bold text-foreground truncate">{toy.owner.display_name}</span>
+              {toy.owner.location_name && (
+                <span className="text-[10px] text-muted truncate">{toy.owner.location_name}</span>
+              )}
+            </div>
           </div>
         )}
       </div>

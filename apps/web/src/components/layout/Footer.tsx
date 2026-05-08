@@ -5,14 +5,14 @@ export default function Footer() {
   const t = useTranslations();
 
   return (
-    <footer className="border-t border-border bg-surface">
+    <footer className="border-t border-outline/10 bg-surface-container-low">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-3">
               <span className="text-2xl">🧸</span>
-              <span className="text-lg font-bold bg-gradient-to-r from-primary to-primary-dark bg-clip-text text-transparent">
+              <span className="text-lg font-heading font-bold bg-gradient-to-r from-primary to-primary-container bg-clip-text text-transparent">
                 {t('common.appName')}
               </span>
             </div>
@@ -61,8 +61,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-border text-center">
-          <p className="text-xs text-muted-light">
+        <div className="mt-8 pt-8 border-t border-outline/10 text-center">
+          <p className="text-xs text-foreground/50">
             © {new Date().getFullYear()} {t('common.appName')}. Built with ❤️ for families, communities, and the planet.
           </p>
         </div>

@@ -22,23 +22,23 @@ function HomeContent() {
       <section className="relative overflow-hidden">
         {/* Background decorations */}
         <div className="absolute inset-0 -z-10">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-10 right-10 w-96 h-96 bg-secondary/10 rounded-full blur-3xl" />
-          <div className="absolute top-40 right-20 w-48 h-48 bg-accent/10 rounded-full blur-3xl" />
+          <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-10 right-10 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" />
+          <div className="absolute top-40 right-20 w-48 h-48 bg-tertiary/5 rounded-full blur-3xl" />
         </div>
 
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36">
           <div className="text-center max-w-3xl mx-auto">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary-50 border border-primary/20 text-primary-dark text-sm font-medium mb-8 animate-slide-up">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary-container/20 border border-primary-container/30 text-primary text-sm font-bold mb-8 animate-slide-up">
               <span>🌱</span>
               <span>减少浪费，建立邻里</span>
             </div>
 
             {/* Title */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight animate-slide-up" style={{ animationDelay: '0.1s' }}>
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-heading font-bold tracking-tight animate-slide-up" style={{ animationDelay: '0.1s' }}>
               {t('home.hero')}
-              <span className="block mt-2 bg-gradient-to-r from-primary via-primary-light to-secondary bg-clip-text text-transparent">
+              <span className="block mt-2 bg-gradient-to-r from-primary to-primary-container bg-clip-text text-transparent">
                 ToyCycle
               </span>
             </h1>
@@ -52,20 +52,20 @@ function HomeContent() {
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up" style={{ animationDelay: '0.3s' }}>
               <Link
                 href="/toys/new"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-primary/25 hover:bg-primary-dark hover:shadow-xl hover:shadow-primary/30 transition-all active:scale-[0.98]"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-primary px-8 py-4 text-base font-bold text-white shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all active:scale-[0.98]"
                 id="cta-publish"
               >
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                 </svg>
                 {t('home.ctaPublish')}
               </Link>
               <Link
                 href="/toys"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border-2 border-border px-8 py-3.5 text-base font-semibold hover:border-primary hover:text-primary hover:bg-primary-50 transition-all"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl border-2 border-outline/20 px-8 py-4 text-base font-bold text-secondary hover:bg-secondary-container/30 transition-all"
                 id="cta-browse"
               >
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                 </svg>
@@ -77,7 +77,7 @@ function HomeContent() {
       </section>
 
       {/* Stats Section */}
-      <section className="border-y border-border bg-surface-elevated">
+      <section className="border-y border-outline/10 bg-surface-container">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-3 gap-8">
             <StatCard emoji="🔄" value="1,280+" label={t('home.statsExchanged')} />
@@ -91,7 +91,7 @@ function HomeContent() {
       <section className="py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold">
+            <h2 className="text-3xl sm:text-4xl font-heading font-bold">
               简单三步，让玩具流转
             </h2>
             <p className="mt-4 text-lg text-muted">
@@ -123,10 +123,10 @@ function HomeContent() {
       </section>
 
       {/* Features */}
-      <section className="py-20 sm:py-28 bg-surface-elevated border-y border-border">
+      <section className="py-20 sm:py-28 bg-surface-container-low border-y border-outline/10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold">为什么选择玩具循环？</h2>
+            <h2 className="text-3xl sm:text-4xl font-heading font-bold">为什么选择玩具循环？</h2>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -155,9 +155,9 @@ function HomeContent() {
       </section>
 
       {/* CTA Bottom */}
-      <section className="py-20 sm:py-28">
+      <section className="py-20 sm:py-28 bg-primary-container/5">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+          <h2 className="text-3xl sm:text-4xl font-heading font-bold mb-4">
             准备好让玩具流转了吗？
           </h2>
           <p className="text-lg text-muted mb-8 max-w-2xl mx-auto">
@@ -165,7 +165,7 @@ function HomeContent() {
           </p>
           <Link
             href="/register"
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-10 py-4 text-lg font-semibold text-white shadow-lg shadow-primary/25 hover:bg-primary-dark hover:shadow-xl transition-all active:scale-[0.98]"
+            className="inline-flex items-center justify-center gap-2 rounded-2xl bg-primary px-10 py-4 text-lg font-bold text-white shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all active:scale-[0.98]"
             id="cta-register"
           >
             🚀 立即加入
@@ -180,10 +180,10 @@ function StatCard({ emoji, value, label }: { emoji: string; value: string; label
   return (
     <div className="text-center">
       <div className="text-2xl mb-2">{emoji}</div>
-      <div className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-primary to-primary-dark bg-clip-text text-transparent">
+      <div className="text-2xl sm:text-4xl font-heading font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
         {value}
       </div>
-      <div className="text-sm text-muted mt-1">{label}</div>
+      <div className="text-sm font-bold text-muted mt-1">{label}</div>
     </div>
   );
 }
@@ -201,15 +201,15 @@ function StepCard({
 }) {
   return (
     <div className="relative group">
-      <div className="p-8 rounded-2xl bg-surface border border-border shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1">
+      <div className="p-8 rounded-3xl bg-surface-container-highest/30 border border-outline/10 shadow-card hover:shadow-card-hover transition-all duration-500 hover:-translate-y-2">
         <div className="flex items-center gap-3 mb-4">
-          <span className="text-xs font-bold text-primary bg-primary-50 px-2.5 py-1 rounded-full">
+          <span className="text-xs font-bold text-primary bg-primary-container/20 px-3 py-1 rounded-full">
             {number}
           </span>
           <span className="text-3xl">{emoji}</span>
         </div>
-        <h3 className="text-lg font-semibold mb-2">{title}</h3>
-        <p className="text-sm text-muted leading-relaxed">{description}</p>
+        <h3 className="text-xl font-heading font-bold mb-2">{title}</h3>
+        <p className="text-sm text-foreground/70 leading-relaxed">{description}</p>
       </div>
     </div>
   );
@@ -225,10 +225,10 @@ function FeatureCard({
   description: string;
 }) {
   return (
-    <div className="p-6 rounded-2xl bg-surface border border-border shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1">
-      <div className="text-3xl mb-4">{emoji}</div>
-      <h3 className="text-base font-semibold mb-2">{title}</h3>
-      <p className="text-sm text-muted leading-relaxed">{description}</p>
+    <div className="p-8 rounded-3xl bg-surface border border-outline/5 shadow-card hover:shadow-card-hover transition-all duration-500 hover:-translate-y-2">
+      <div className="text-4xl mb-4">{emoji}</div>
+      <h3 className="text-lg font-heading font-bold mb-2">{title}</h3>
+      <p className="text-sm text-foreground/70 leading-relaxed">{description}</p>
     </div>
   );
 }
