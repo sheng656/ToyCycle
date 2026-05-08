@@ -104,3 +104,117 @@ export async function createExchangeRequest(toyId: string, message: string = '')
 
   return { success: true, data: request };
 }
+
+export async function acceptExchangeRequest(requestId: string) {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) return { error: '请先登录' };
+
+  // 1. Get request details
+  const { data: request, error: requestError } = await supabase
+    .from('exchange_requests')
+    .select('*')
+    .eq('id', requestId)
+    .single();
+
+  if (requestError || !request) return { error: '请求不存在' };
+  if (request.owner_id !== user.id) return { error: '没有操作权限' };
+  if (request.status !== 'pending') return { error: '请求状态已变更' };
+
+  // 2. Update request status
+  const { error: updateError } = await supabase
+    .from('exchange_requests')
+    .update({ status: 'accepted' })
+    .eq('id', requestId);
+
+  if (updateError) return { error: updateError.message };
+
+  // 3. Update toy status
+  await supabase
+    .from('toys')
+    .update({ status: 'exchanged' })
+    .eq('id', request.toy_id);
+
+  // 4. Transfer credits to owner
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('credit_balance')
+    .eq('id', user.id)
+    .single();
+
+  if (profile) {
+    await supabase
+      .from('profiles')
+      .update({ credit_balance: profile.credit_balance + request.credits_amount })
+      .eq('id', user.id);
+
+    // Record transaction for owner
+    await supabase
+      .from('credit_transactions')
+      .insert({
+        user_id: user.id,
+        amount: request.credits_amount,
+        type: 'earn',
+        description: '交换玩具获得积分',
+        related_exchange_id: requestId
+      });
+  }
+
+  revalidatePath('/profile');
+  return { success: true };
+}
+
+export async function rejectExchangeRequest(requestId: string) {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) return { error: '请先登录' };
+
+  // 1. Get request details
+  const { data: request, error: requestError } = await supabase
+    .from('exchange_requests')
+    .select('*')
+    .eq('id', requestId)
+    .single();
+
+  if (requestError || !request) return { error: '请求不存在' };
+  if (request.owner_id !== user.id) return { error: '没有操作权限' };
+  if (request.status !== 'pending') return { error: '请求状态已变更' };
+
+  // 2. Update request status
+  const { error: updateError } = await supabase
+    .from('exchange_requests')
+    .update({ status: 'rejected' })
+    .eq('id', requestId);
+
+  if (updateError) return { error: updateError.message };
+
+  // 3. Refund credits to requester
+  const { data: requesterProfile } = await supabase
+    .from('profiles')
+    .select('credit_balance')
+    .eq('id', request.requester_id)
+    .single();
+
+  if (requesterProfile) {
+    await supabase
+      .from('profiles')
+      .update({ credit_balance: requesterProfile.credit_balance + request.credits_amount })
+      .eq('id', request.requester_id);
+
+    // Record transaction for requester
+    await supabase
+      .from('credit_transactions')
+      .insert({
+        user_id: request.requester_id,
+        amount: request.credits_amount,
+        type: 'bonus',
+        description: '交换请求被拒绝，退还预留金',
+        related_exchange_id: requestId
+      });
+  }
+
+  revalidatePath('/profile');
+  return { success: true };
+}
