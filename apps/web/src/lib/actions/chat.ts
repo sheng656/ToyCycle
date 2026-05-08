@@ -111,7 +111,7 @@ export async function sendMessage(conversationId: string, content: string) {
     .eq('id', conversationId)
     .single();
 
-  if (conv?.exchange_request?.status === 'pending') {
+  if ((conv?.exchange_request as any)?.status === 'pending') {
     // Count last messages from this sender
     const { data: lastMessages } = await supabase
       .from('messages')
