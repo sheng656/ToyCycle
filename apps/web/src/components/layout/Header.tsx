@@ -2,14 +2,36 @@
 
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { createBrowserClient } from '@supabase/ssr';
+import type { User } from '@supabase/supabase-js';
+import { signOut } from '@/lib/actions/auth';
 
 export default function Header() {
   const t = useTranslations();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const supabase = createBrowserClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    );
+
+    // Check initial auth state
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      setUser(user);
+    });
+
+    // Listen for auth state changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   return (
-    // Use warm surface-container-low so it feels light & in-palette, not a cold grey/white
     <header className="sticky top-0 z-50 border-b border-outline/10 bg-surface-container-low/90 backdrop-blur-xl">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
@@ -33,20 +55,45 @@ export default function Header() {
 
           {/* Actions */}
           <div className="hidden md:flex items-center gap-3">
-            <Link
-              href="/login"
-              className="text-sm font-bold text-primary/80 hover:text-primary transition-colors"
-              id="login-button"
-            >
-              {t('common.login')}
-            </Link>
-            <Link
-              href="/register"
-              className="inline-flex items-center justify-center rounded-2xl bg-primary px-5 py-2 text-sm font-bold text-white shadow-card hover:scale-[1.03] transition-all active:scale-[0.97]"
-              id="register-button"
-            >
-              {t('common.register')}
-            </Link>
+            {user ? (
+              <>
+                <Link
+                  href="/profile"
+                  className="inline-flex items-center gap-2 text-sm font-bold text-primary/80 hover:text-primary transition-colors"
+                  id="profile-button"
+                >
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white text-xs font-bold">
+                    {user.user_metadata?.display_name?.charAt(0) || '👤'}
+                  </div>
+                </Link>
+                <form action={signOut}>
+                  <button
+                    type="submit"
+                    className="text-sm font-medium text-muted hover:text-error transition-colors"
+                    id="logout-button"
+                  >
+                    {t('common.logout')}
+                  </button>
+                </form>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className="text-sm font-bold text-primary/80 hover:text-primary transition-colors"
+                  id="login-button"
+                >
+                  {t('common.login')}
+                </Link>
+                <Link
+                  href="/register"
+                  className="inline-flex items-center justify-center rounded-2xl bg-primary px-5 py-2 text-sm font-bold text-white shadow-card hover:scale-[1.03] transition-all active:scale-[0.97]"
+                  id="register-button"
+                >
+                  {t('common.register')}
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -76,18 +123,42 @@ export default function Header() {
               <MobileNavLink href="/chat" onClick={() => setMobileMenuOpen(false)}>{t('nav.messages')}</MobileNavLink>
             </nav>
             <div className="mt-4 pt-4 border-t border-outline/10 flex gap-3">
-              <Link
-                href="/login"
-                className="flex-1 text-center rounded-2xl border-2 border-outline/20 px-4 py-2.5 text-sm font-bold text-primary hover:bg-primary-container/10 transition-colors"
-              >
-                {t('common.login')}
-              </Link>
-              <Link
-                href="/register"
-                className="flex-1 text-center rounded-2xl bg-primary px-4 py-2.5 text-sm font-bold text-white hover:scale-[1.02] transition-all"
-              >
-                {t('common.register')}
-              </Link>
+              {user ? (
+                <>
+                  <Link
+                    href="/profile"
+                    className="flex-1 text-center rounded-2xl border-2 border-outline/20 px-4 py-2.5 text-sm font-bold text-primary hover:bg-primary-container/10 transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {t('profile.myProfile')}
+                  </Link>
+                  <form action={signOut} className="flex-1">
+                    <button
+                      type="submit"
+                      className="w-full text-center rounded-2xl bg-error/10 px-4 py-2.5 text-sm font-bold text-error transition-colors"
+                    >
+                      {t('common.logout')}
+                    </button>
+                  </form>
+                </>
+              ) : (
+                <>
+                  <Link
+                    href="/login"
+                    className="flex-1 text-center rounded-2xl border-2 border-outline/20 px-4 py-2.5 text-sm font-bold text-primary hover:bg-primary-container/10 transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {t('common.login')}
+                  </Link>
+                  <Link
+                    href="/register"
+                    className="flex-1 text-center rounded-2xl bg-primary px-4 py-2.5 text-sm font-bold text-white hover:scale-[1.02] transition-all"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {t('common.register')}
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         )}
