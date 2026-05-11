@@ -11,4 +11,3 @@ export const TOY_CATEGORIES = {
   other: '📦',
 } as const;
 
-export type ToyCategory = keyof typeof TOY_CATEGORIES;

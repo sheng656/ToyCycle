@@ -4,4 +4,3 @@ export const TOY_CONDITIONS = [
   'used'
 ] as const;
 
-export type ToyCondition = typeof TOY_CONDITIONS[number];
