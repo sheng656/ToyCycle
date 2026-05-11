@@ -38,7 +38,7 @@ export const Button = ({ title, variant = 'primary', style, ...props }: ButtonPr
   const getTextColor = () => {
     switch (variant) {
       case 'primary': return Colors.light.onPrimary;
-      case 'secondary': return Colors.light.onSecondary; // Need to add to Colors if missing
+      case 'secondary': return Colors.light.primary; // Fallback since onSecondary doesn't exist
       case 'ghost': return Colors.light.primary;
       default: return Colors.light.onPrimary;
     }
