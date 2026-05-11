@@ -119,7 +119,7 @@ export default function DiscoveryScreen() {
             {/* Callout on Press */}
             <Callout 
               tooltip 
-              onPress={() => router.push(`/toys/${toy.id}`)} // Note: requires toys/[id] route
+              onPress={() => router.push({ pathname: '/toys/[id]', params: { id: toy.id } })} // Fixed Expo Router typing
             >
               <View style={styles.calloutContainer}>
                 <Avatar 
