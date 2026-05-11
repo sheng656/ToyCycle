@@ -1,0 +1,16 @@
+{
+  "common": {
+    "welcome": "欢迎来到 ToyCycle",
+    "search": "搜索玩具...",
+    "confirm": "确定",
+    "cancel": "取消",
+    "loading": "加载中..."
+  },
+  "tabs": {
+    "explore": "发现",
+    "list": "玩具",
+    "publish": "发布",
+    "messages": "消息",
+    "profile": "我的"
+  }
+}

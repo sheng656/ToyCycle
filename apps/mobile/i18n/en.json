@@ -1,0 +1,16 @@
+{
+  "common": {
+    "welcome": "Welcome to ToyCycle",
+    "search": "Search toys...",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "loading": "Loading..."
+  },
+  "tabs": {
+    "explore": "Explore",
+    "list": "Toys",
+    "publish": "Publish",
+    "messages": "Messages",
+    "profile": "Profile"
+  }
+}
