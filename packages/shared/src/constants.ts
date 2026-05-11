@@ -17,23 +17,6 @@ export const DEFAULT_ISOCHRONE_MINUTES = 15;
 /** Available travel modes for isochrone */
 export const TRAVEL_MODES = ['walking', 'driving'] as const;
 
-/** Toy categories with emoji icons */
-export const TOY_CATEGORIES = {
-  building: '🧱',
-  figures: '🧸',
-  vehicles: '🚗',
-  puzzles: '🧩',
-  outdoor: '⚽',
-  electronic: '🎮',
-  stuffed: '🐻',
-  educational: '📐',
-  creative: '🎨',
-  other: '📦',
-} as const;
-
-/** Age range labels */
-export const AGE_RANGES = ['0-1', '1-3', '3-6', '6-9', '9-12', '12+'] as const;
-
 /** Subscription tiers */
 export const SUBSCRIPTION_TIERS = {
   free: {
