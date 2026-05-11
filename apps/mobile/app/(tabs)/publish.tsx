@@ -48,6 +48,31 @@ export default function PublishScreen() {
     setImages(images.filter((_, i) => i !== index));
   };
 
+  const uploadImage = async (uri: string) => {
+    const fileName = uri.split('/').pop();
+    const fileExt = fileName?.split('.').pop();
+    const path = `${user?.id}/${Date.now()}.${fileExt}`;
+
+    const formData = new FormData();
+    formData.append('file', {
+      uri,
+      name: fileName,
+      type: `image/${fileExt}`,
+    } as any);
+
+    const { data, error } = await supabase.storage
+      .from('toy-images')
+      .upload(path, formData);
+
+    if (error) throw error;
+
+    const { data: { publicUrl } } = supabase.storage
+      .from('toy-images')
+      .getPublicUrl(path);
+
+    return publicUrl;
+  };
+
   const handlePublish = async () => {
     if (!title || !description || images.length === 0) {
       Alert.alert('Error', 'Please fill all fields and add at least one image.');
@@ -57,14 +82,12 @@ export default function PublishScreen() {
     try {
       setLoading(true);
       
-      // In a real app, upload images to Supabase Storage and get URLs.
-      // For now, we mock the URLs.
-      const mockImageUrls = images.map((uri, idx) => `https://placehold.co/400x400/orange/white?text=Toy+${idx}`);
+      const uploadedUrls = await Promise.all(images.map(uploadImage));
 
       // We also need location. Mocking or fetching from user profile
       const { data: profile } = await supabase
         .from('profiles')
-        .select('location_lat, location_lng')
+        .select('latitude, longitude') // Fixed field names to match types.ts
         .eq('id', user?.id)
         .single();
 
@@ -75,11 +98,11 @@ export default function PublishScreen() {
         category,
         condition,
         age_range: ageRange,
-        images: mockImageUrls,
+        images: uploadedUrls,
         status: 'available',
         estimated_value: 10, // Default for MVP
-        location_lat: profile?.location_lat || -36.8485,
-        location_lng: profile?.location_lng || 174.7633,
+        latitude: profile?.latitude || -36.8485,
+        longitude: profile?.longitude || 174.7633,
       }).select().single();
 
       if (error) throw error;
