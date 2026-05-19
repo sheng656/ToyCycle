@@ -39,3 +39,19 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+
+# coverage
+coverage/
+coverage-final.json
+lcov.info
+
+# caches
+.cache/
+.jest/
+
+# debug logs
+yarn-debug.log*
+yarn-error.log*
+
+# Expo shared
+.expo-shared/

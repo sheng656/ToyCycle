@@ -30,7 +30,8 @@ export default function ToyDetailScreen() {
         .from('toys')
         .select(`
           *,
-          owner:profiles!toys_owner_id_fkey(id, full_name, avatar_url)
+          owner:profiles!toys_owner_id_fkey(id, display_name, avatar_url),
+          images:toy_images(*)
         `)
         .eq('id', id)
         .single();
@@ -38,8 +39,13 @@ export default function ToyDetailScreen() {
       if (error) {
         // Fallback if relation fails
         const fallbackData = await supabase.from('toys').select('*').eq('id', id).single();
-        const ownerData = await supabase.from('profiles').select('*').eq('id', fallbackData.data.owner_id).single();
-        setToy({ ...fallbackData.data, owner: ownerData.data });
+        if (fallbackData.data) {
+          const ownerData = await supabase.from('profiles').select('*').eq('id', fallbackData.data.owner_id).single();
+          const imagesData = await supabase.from('toy_images').select('*').eq('toy_id', id);
+          setToy({ ...fallbackData.data, owner: ownerData?.data, images: imagesData.data || [] });
+        } else {
+          setToy(null);
+        }
       } else {
         setToy(data);
       }
@@ -104,7 +110,7 @@ export default function ToyDetailScreen() {
         {/* Images Carousel Placeholder - just showing first image for now */}
         <View style={styles.imageContainer}>
           {toy.images && toy.images.length > 0 ? (
-            <Image source={{ uri: toy.images[0] }} style={styles.image} />
+            <Image source={{ uri: toy.images[0].image_url }} style={styles.image} />
           ) : (
             <View style={[styles.image, styles.placeholderImage]}>
               <Text style={{ color: Colors.light.outline }}>No Image</Text>
@@ -128,7 +134,7 @@ export default function ToyDetailScreen() {
           <View style={styles.ownerCard}>
             <Avatar size={48} url={toy.owner?.avatar_url} />
             <View style={styles.ownerInfo}>
-              <Text style={styles.ownerName}>{toy.owner?.full_name || 'Unknown User'}</Text>
+              <Text style={styles.ownerName}>{toy.owner?.display_name || 'Unknown User'}</Text>
               <Text style={styles.ownerCredit}>Estimated value: {toy.estimated_value || 10} Credits</Text>
             </View>
           </View>

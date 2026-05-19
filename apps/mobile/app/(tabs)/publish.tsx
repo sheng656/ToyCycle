@@ -91,21 +91,32 @@ export default function PublishScreen() {
         .eq('id', user?.id)
         .single();
 
-      const { data, error } = await supabase.from('toys').insert({
+      const { data: toyData, error: toyError } = await supabase.from('toys').insert({
         owner_id: user?.id,
         title,
         description,
         category,
         condition,
         age_range: ageRange,
-        images: uploadedUrls,
         status: 'available',
         estimated_value: 10, // Default for MVP
-        latitude: profile?.latitude || -36.8485,
-        longitude: profile?.longitude || 174.7633,
+        latitude: profile?.latitude || 39.9042, // Default to Beijing center
+        longitude: profile?.longitude || 116.4074,
       }).select().single();
 
-      if (error) throw error;
+      if (toyError) throw toyError;
+
+      // Insert images into toy_images table
+      if (uploadedUrls.length > 0 && toyData) {
+        const { error: imagesError } = await supabase.from('toy_images').insert(
+          uploadedUrls.map((url, index) => ({
+            toy_id: toyData.id,
+            image_url: url,
+            display_order: index,
+          }))
+        );
+        if (imagesError) throw imagesError;
+      }
 
       Alert.alert('Success', 'Toy published successfully!');
       router.replace('/(tabs)');
@@ -142,7 +153,7 @@ export default function PublishScreen() {
       </View>
 
       <Input label="Title" value={title} onChangeText={setTitle} placeholder="What is it?" />
-      <Input label="Description" value={description} onChangeText={setDescription} multiline numberOfLines={4} style={{ height: 100 }} />
+      <Input label="Description" value={description} onChangeText={setDescription} placeholder="Describe your toy (condition, special features, etc.)" multiline numberOfLines={4} style={{ height: 100 }} />
 
       <Text style={styles.sectionTitle}>Category</Text>
       <View style={styles.chipGroup}>

@@ -15,15 +15,15 @@ export default function ProfileScreen() {
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState(false);
   const [profile, setProfile] = useState<{
-    full_name: string;
+    display_name: string;
     avatar_url: string | null;
-    location_lat: number | null;
-    location_lng: number | null;
+    latitude: number | null;
+    longitude: number | null;
   }>({
-    full_name: '',
+    display_name: '',
     avatar_url: null,
-    location_lat: null,
-    location_lng: null,
+    latitude: null,
+    longitude: null,
   });
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export default function ProfileScreen() {
 
       const { data, error, status } = await supabase
         .from('profiles')
-        .select('full_name, avatar_url, location_lat, location_lng')
+        .select('display_name, avatar_url, latitude, longitude')
         .eq('id', user.id)
         .single();
 
@@ -47,10 +47,10 @@ export default function ProfileScreen() {
 
       if (data) {
         setProfile({
-          full_name: data.full_name || '',
+          display_name: data.display_name || '',
           avatar_url: data.avatar_url,
-          location_lat: data.location_lat,
-          location_lng: data.location_lng,
+          latitude: data.latitude,
+          longitude: data.longitude,
         });
       }
     } catch (error) {
@@ -69,7 +69,7 @@ export default function ProfileScreen() {
 
       const updates = {
         id: user.id,
-        full_name: profile.full_name,
+        display_name: profile.display_name,
         avatar_url: profile.avatar_url,
         updated_at: new Date(),
       };
@@ -134,9 +134,9 @@ export default function ProfileScreen() {
 
       <View style={styles.formSection}>
         <Input
-          label="Full Name"
-          value={profile.full_name}
-          onChangeText={(text) => setProfile((prev) => ({ ...prev, full_name: text }))}
+          label="Display Name"
+          value={profile.display_name}
+          onChangeText={(text) => setProfile((prev) => ({ ...prev, display_name: text }))}
         />
         <Input
           label="Email"

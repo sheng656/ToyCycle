@@ -19,9 +19,9 @@ interface Toy {
   description: string;
   condition: string;
   category: string;
-  images: string[];
-  location_lat: number;
-  location_lng: number;
+  images: { image_url: string }[];
+  latitude: number;
+  longitude: number;
 }
 
 export default function DiscoveryScreen() {
@@ -31,9 +31,9 @@ export default function DiscoveryScreen() {
   const [toys, setToys] = useState<Toy[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const AUCKLAND_DEFAULT = {
-    latitude: -36.8485,
-    longitude: 174.7633,
+  const BEIJING_DEFAULT = {
+    latitude: 39.9042,
+    longitude: 116.4074,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   };
@@ -43,11 +43,11 @@ export default function DiscoveryScreen() {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         Alert.alert('Permission to access location was denied');
-        // Default to Auckland
+        // Default to Beijing
         setLocation({
           coords: {
-            latitude: AUCKLAND_DEFAULT.latitude,
-            longitude: AUCKLAND_DEFAULT.longitude,
+            latitude: BEIJING_DEFAULT.latitude,
+            longitude: BEIJING_DEFAULT.longitude,
             altitude: null,
             accuracy: null,
             altitudeAccuracy: null,
@@ -69,10 +69,10 @@ export default function DiscoveryScreen() {
     try {
       const { data, error } = await supabase
         .from('toys')
-        .select('*')
+        .select('*, images:toy_images(*)')
         .eq('status', 'available')
-        .not('location_lat', 'is', null)
-        .not('location_lng', 'is', null);
+        .not('latitude', 'is', null)
+        .not('longitude', 'is', null);
 
       if (error) {
         throw error;
@@ -106,7 +106,7 @@ export default function DiscoveryScreen() {
         {toys.map((toy) => (
           <Marker
             key={toy.id}
-            coordinate={{ latitude: toy.location_lat, longitude: toy.location_lng }}
+            coordinate={{ latitude: toy.latitude, longitude: toy.longitude }}
           >
             {/* Custom Marker View */}
             <View style={styles.markerContainer}>
@@ -124,7 +124,7 @@ export default function DiscoveryScreen() {
               <View style={styles.calloutContainer}>
                 <Avatar 
                   size={60} 
-                  url={toy.images && toy.images.length > 0 ? toy.images[0] : null} 
+                  url={toy.images && toy.images.length > 0 ? toy.images[0].image_url : null} 
                   style={{ borderRadius: BorderRadius.md }}
                 />
                 <View style={styles.calloutInfo}>

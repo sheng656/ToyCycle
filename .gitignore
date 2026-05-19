@@ -16,6 +16,8 @@ build/
 
 # debug
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # IDE
 .vscode/
@@ -29,3 +31,29 @@ Thumbs.db
 
 # Supabase
 supabase/.temp/
+
+# TypeScript
+*.tsbuildinfo
+
+# coverage
+coverage/
+coverage-final.json
+lcov.info
+lcov-report/
+
+# jest/cache and tool caches
+.jest/
+.cache/
+node_modules/.cache/
+
+# test artifacts
+test-results/
+*.test.results.xml
+
+# Expo
+.expo/
+.expo-shared/
+
+# caches
+.parcel-cache/
+.turbo/

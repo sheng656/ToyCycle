@@ -43,6 +43,27 @@ ToyCycle 是一个专注于社区玩具交换的平台。通过地理位置发�
    npm run start
    ```
 
+### 🔬 核心字段审计与自动化测试 (M5.5)
+
+为了解决移动端与 Supabase 数据库字段不匹配导致的崩溃问题，项目进行了一次全面的字段审计与修复，并搭建了完整的自动化测试框架。
+
+#### 1. 数据库字段审计与修复
+- **双表级联插入**: `publish.tsx` 从直接向 `toys` 插入图片修复为在 `toys` 插入成功后，级联插入 `toy_images` 关联表。默认未定位用户回退至北京中心坐标 `(39.9042, 116.4074)`。
+- **字段规范化**: 将所有页面/组件中请求 profiles 表的 `full_name` 改为 `display_name`，定位字段 `location_lat`/`location_lng` 改为 `latitude`/`longitude`，修复聊天和详情页展示。
+- **图片关联查询**: 修复 `index.tsx`, `toys/[id].tsx`, `messages.tsx` 中的关联查询，使用 `images:toy_images(*)` 获取真实存储图片。
+
+#### 2. 自动化测试配置 (Jest + RNTL)
+我们为 `apps/mobile` 配置了完整的测试框架（`jest-expo` & `@testing-library/react-native`）：
+- **运行测试**:
+  ```bash
+  cd apps/mobile
+  npm run test
+  ```
+- **测试覆盖范围**:
+  - **UI 组件**: `Button`、`Input`、`Chip`。由于 React Native 0.83.6 中 Native TextInput 的底层匹配限制，采用 `UNSAFE_getByProps` 实现了健壮的字段匹配。
+  - **状态管理**: 单元测试覆盖 `useAuthStore` 鉴权与 Session 自动保存。
+  - **核心页面**: 包含 `publish.tsx` 发布表单验证逻辑与 `toys/[id].tsx` 详情页级联加载/状态测试。
+
 ### 📅 路线图
 
 - [x] Phase 1: 核心基础、地图集成与交换流程 (Web)
@@ -91,6 +112,27 @@ Early web prototype built with Next.js 14 + TailwindCSS.
    cd apps/mobile
    npm run start
    ```
+
+### 🔬 Core Database Audit & Automated Testing (M5.5)
+
+To resolve database column mismatches causing crashes or blank states on the mobile app, we conducted a comprehensive DB schema audit, resolved key SQL join/insert inconsistencies, and configured a robust automated testing environment.
+
+#### 1. Database Schema Audit & Inconsistency Fixes
+- **Cascading Image Insertion**: Updated `publish.tsx` to insert into `toys` first, fetch the record ID, and then cascade inserts into `toy_images`. Location fallbacks set to Beijing `(39.9042, 116.4074)` for priority testing.
+- **Column Standardisation**: Changed all occurrences of non-existent `full_name` in profile queries to `display_name`, and mapped `location_lat`/`location_lng` to `latitude`/`longitude` to match database schema.
+- **Relational Image Selection**: Resolved selection queries in `index.tsx`, `toys/[id].tsx`, and `messages.tsx` to fetch `images:toy_images(*)` instead of assuming a flat column in `toys`.
+
+#### 2. Automated Testing Environment (Jest + RNTL)
+We configured a comprehensive testing framework matching Expo SDK 55 in `apps/mobile`:
+- **Run Tests**:
+  ```bash
+  cd apps/mobile
+  npm run test
+  ```
+- **Test Coverage**:
+  - **UI Components**: Unit tests for `Button`, `Input`, and `Chip`. Addressed React Native 0.83.6 custom text input mock limitations by querying utilizing `UNSAFE_getByProps`.
+  - **State Store**: Standard unit tests for `useAuthStore` session sync and state persistence.
+  - **Screen Integrations**: Logic validation and UI flows on `publish.tsx` form inputs and `toys/[id].tsx` detail screens.
 
 ### 📅 Roadmap
 

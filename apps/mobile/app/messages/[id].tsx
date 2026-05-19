@@ -57,7 +57,7 @@ export default function ChatScreen() {
       // 1. Get exchange request
       const { data: reqData, error: reqError } = await supabase
         .from('exchange_requests')
-        .select('*, toy:toys(title), requester:profiles!exchange_requests_requester_id_fkey(full_name), owner:profiles!exchange_requests_owner_id_fkey(full_name)')
+        .select('*, toy:toys(title), requester:profiles!exchange_requests_requester_id_fkey(display_name), owner:profiles!exchange_requests_owner_id_fkey(display_name)')
         .eq('id', id)
         .single();
         

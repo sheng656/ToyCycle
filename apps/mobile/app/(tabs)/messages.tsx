@@ -32,9 +32,9 @@ export default function MessagesScreen() {
         .from('exchange_requests')
         .select(`
           *,
-          toy:toys(title, images),
-          requester:profiles!exchange_requests_requester_id_fkey(full_name, avatar_url),
-          owner:profiles!exchange_requests_owner_id_fkey(full_name, avatar_url)
+          toy:toys(title, images:toy_images(image_url)),
+          requester:profiles!exchange_requests_requester_id_fkey(display_name, avatar_url),
+          owner:profiles!exchange_requests_owner_id_fkey(display_name, avatar_url)
         `)
         .or(`requester_id.eq.${user.id},owner_id.eq.${user.id}`)
         .order('updated_at', { ascending: false });
@@ -51,7 +51,7 @@ export default function MessagesScreen() {
   const renderItem = ({ item }: { item: any }) => {
     const isOwner = user?.id === item.owner_id;
     const otherUser = isOwner ? item.requester : item.owner;
-    const toyImage = item.toy?.images?.[0] || null;
+    const toyImage = item.toy?.images?.[0]?.image_url || null;
 
     let statusColor = Colors.light.outline;
     if (item.status === 'pending') statusColor = Colors.light.primaryContainer;
@@ -66,7 +66,7 @@ export default function MessagesScreen() {
         <Avatar size={50} url={otherUser?.avatar_url} style={styles.avatar} />
         <View style={styles.content}>
           <View style={styles.headerRow}>
-            <Text style={styles.name} numberOfLines={1}>{otherUser?.full_name || 'Unknown'}</Text>
+            <Text style={styles.name} numberOfLines={1}>{otherUser?.display_name || 'Unknown'}</Text>
             <Chip label={item.status} color={statusColor} style={styles.statusChip} />
           </View>
           <Text style={styles.toyTitle} numberOfLines={1}>

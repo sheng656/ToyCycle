@@ -52,6 +52,7 @@
 - [x] **M3: 地图发现功能** (高德瓦片渲染)
 - [x] **M4: 玩具发布与真实存储** (Supabase Storage 集成)
 - [x] **M5: 实时聊天与交换管理** (Realtime 订阅)
+- [x] **M5.5: 核心字段审计与自动化测试** (Jest + RNTL 测试环境，覆盖 23 个测试用例，彻底修复 6 大数据库字段不一致崩溃问题)
 - [ ] **M6: 推送通知与性能优化** (Expo Notifications)
 
 ---
@@ -109,6 +110,7 @@
 - [x] **M3: Map Discovery** (AMap Tiles rendering)
 - [x] **M4: Publishing & Real Storage** (Supabase Storage integration)
 - [x] **M5: Real-time Chat & Exchange Management** (Realtime subscription)
+- [x] **M5.5: Database Field Audit & Automated Testing** (Jest + RNTL test suites with 23 test cases, resolved 6 critical database column mismatch bugs)
 - [ ] **M6: Push Notifications & Performance Tuning** (Expo Notifications)
 
 ---
