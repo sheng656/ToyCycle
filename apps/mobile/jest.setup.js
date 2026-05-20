@@ -192,6 +192,13 @@ jest.mock('@supabase/supabase-js', () => {
       return { data: { subscription: { unsubscribe: jest.fn() } } };
     }),
     signOut: jest.fn(() => Promise.resolve()),
+    // Auth methods required by LoginScreen and RegisterScreen tests
+    signInWithPassword: jest.fn(() =>
+      Promise.resolve({ data: { user: null, session: null }, error: null })
+    ),
+    signUp: jest.fn(() =>
+      Promise.resolve({ data: { user: null, session: null }, error: null })
+    ),
   };
 
   const mockStorage = {
